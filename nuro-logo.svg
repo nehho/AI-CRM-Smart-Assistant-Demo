@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#1E40AF" />
+    </linearGradient>
+  </defs>
+  <rect x="10" y="15" width="30" height="30" rx="6" fill="url(#gradient)" />
+  <path d="M20 25 L30 35 L20 45" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M30 25 L20 35 L30 45" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="50" y="35" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#2563EB">NuroCRM</text>
+  <text x="50" y="48" font-family="Inter, sans-serif" font-size="8" font-weight="400" fill="#6B7280">Redefining Client Relationships with AI</text>
+</svg>

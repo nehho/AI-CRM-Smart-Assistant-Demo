@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NuroCRM - Redefining Client Relationships with AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .dark {
+            --bg-primary: #111827;
+            --bg-secondary: #1F2937;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --accent: #3B82F6;
+        }
+        .light {
+            --bg-primary: #F9FAFB;
+            --bg-secondary: #FFFFFF;
+            --text-primary: #111827;
+            --text-secondary: #4B5563;
+            --accent: #2563EB;
+        }
+        .theme-transition {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .card {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(0);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #60a5fa);
+            opacity: 0.8;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #1e40af);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+            transform: translateY(0);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.4);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        .btn-outline {
+            border: 1px solid var(--text-secondary);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .nav-item {
+            color: var(--text-secondary);
+        }
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--accent), #1e40af);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+        }
+        .nav-item:hover:not(.active) {
+            background-color: rgba(107, 114, 128, 0.1);
+        }
+        .waveform-bar {
+            background: linear-gradient(180deg, var(--accent), #60a5fa);
+            width: 3px;
+            margin: 0 1px;
+            border-radius: 1px;
+            animation: wave 1s infinite ease-in-out;
+            box-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
+        }
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 30px; }
+        }
+        .client-bubble {
+            background-color: #E5E7EB;
+            color: #111827;
+            border-radius: 1rem 1rem 1rem 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .rm-bubble {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: #111827;
+            border-radius: 1rem 1rem 0 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .dark .client-bubble {
+            background-color: #374151;
+            color: #F9FAFB;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+        .dark .rm-bubble {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: #F9FAFB;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .slogan {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: -0.25rem;
+        }
+        .icon-3d {
+            filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s;
+        }
+        .icon-3d:hover {
+            filter: drop-shadow(0 6px 5px rgba(37, 99, 235, 0.3));
+            transform: translateY(-2px);
+        }
+        .dashboard-icon {
+            background: linear-gradient(135deg, var(--accent), #60a5fa);
+            border-radius: 50%;
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3), 0 4px 6px -2px rgba(37, 99, 235, 0.2);
+            transform: translateY(0);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .dashboard-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.4), 0 10px 10px -5px rgba(37, 99, 235, 0.3);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent), #60a5fa);
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+            border-radius: 9999px;
+        }
+        .risk-bar {
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+            border-radius: 9999px;
+        }
+        .tag {
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 9999px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        .tag:hover {
+            background: rgba(37, 99, 235, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+        .input-3d {
+            transition: all 0.3s;
+            border: 1px solid rgba(209, 213, 219, 0.5);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .input-3d:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            transform: translateY(-1px);
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .dark .glassmorphism {
+            background: rgba(31, 41, 55, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="light theme-transition">
+    <div class="min-h-screen flex">
+        <!-- 侧边栏 -->
+        <aside class="fixed top-0 left-0 z-30 h-full w-64 pt-16 bg-gray-100 shadow-md transform transition-transform duration-300 ease-in-out hidden md:block dark:bg-gray-900">
+            <nav class="mt-6 px-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#dashboard" class="nav-item active flex items-center px-4 py-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            <span>仪表盘</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#voice" class="nav-item flex items-center px-4 py-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                            </svg>
+                            <span>语音录制</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#transcription" class="nav-item flex items-center px-4 py-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span>转录审阅</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#profile" class="nav-item flex items-center px-4 py-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            <span>用户画像</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#questionnaire" class="nav-item flex items-center px-4 py-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                            <span>智能问卷</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#clients" class="nav-item flex items-center px-4 py-2 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <span>客户管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <div class="flex-1 flex flex-col min-h-screen">
+            <!-- 头部 -->
+            <header class="bg-white dark:bg-gray-800 shadow-sm fixed top-0 left-0 right-0 z-10">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center">
+                        <button id="mobile-menu-button" class="mr-3 p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 md:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                        <a href="#" class="flex flex-col">
+                            <div class="logo-container">
+                                <img src="images/nuro-logo.svg" alt="NuroCRM Logo" class="h-10" />
+                            </div>
+                            <div class="slogan">Redefining Client Relationships with AI</div>
+                        </a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                            <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400 hidden icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 移动端侧边栏 -->
+            <div id="mobile-sidebar" class="fixed inset-0 z-20 transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+                <div class="absolute inset-0 bg-black bg-opacity-50" id="sidebar-backdrop"></div>
+                <div class="absolute top-0 left-0 h-full w-64 pt-16 bg-gray-100 dark:bg-gray-900 shadow-md">
+                    <nav class="mt-6 px-4">
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="#dashboard" class="nav-item active flex items-center px-4 py-2 rounded-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                    </svg>
+                                    <span>仪表盘</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#voice" class="nav-item flex items-center px-4 py-2 rounded-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 icon-3d" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                                    </svg>
+                                    <span>语音录制</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#transcription" class="nav-item flex items-center px-4 py-2 rounded-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 icon-3d" fill="none" viewBox="0 0 24 24" stroke="cu
+(Content truncated due to size limit. Use line ranges to read in chunks)
